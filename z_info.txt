@@ -10,3 +10,8 @@ and now server extracts information from the token , and gets details of the use
 Token is not valid for all the time , they have expiration, after login new token is generated.
 
 if two users get same token then that will be problem , which we resolve in our developement process.
+
+( type : module to use import statement )
+
+Logger -> in server when did a request came , what request came, what was the method , status codes , what was request
+use npm i morgan ( its a logger)
