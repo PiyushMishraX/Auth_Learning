@@ -1,0 +1,12 @@
+checking and verifying , which user is requesting a specific api, is authntication
+
+First user have to register , before accessing any feature.
+
+Register feature -> user -> share details to -> backend server -> server saves details in -> database  ---> backend server then creates a token -> taken have some data ( some ammount of data that we are storing in database , user id for being specific ) -> token is sent to user in response 
+
+Token is saved in user device , and for each request the token is send with it to server , 
+and now server extracts information from the token , and gets details of the user , and identify the user 
+
+Token is not valid for all the time , they have expiration, after login new token is generated.
+
+if two users get same token then that will be problem , which we resolve in our developement process.
