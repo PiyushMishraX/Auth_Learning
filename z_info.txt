@@ -15,3 +15,13 @@ if two users get same token then that will be problem , which we resolve in our 
 
 Logger -> in server when did a request came , what request came, what was the method , status codes , what was request
 use npm i morgan ( its a logger)
+
+DNS problem - It's required to write this dns import and setServer to 1.1.1.1 or 8.8.8.8 because  local Internet Service Provider (ISP) or local network router is failing to resolve the specialized DNS records required by MongoDB Atlas
+
+fix for common js -
+const dns = require("dns") // this is for common js
+dns.setServers(["1.1.1.1","8.8.8.8"]);
+
+fix for type module -
+import dns from "dns"
+dns.setServers(["1.1.1.1","8.8.8.8"])
