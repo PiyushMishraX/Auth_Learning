@@ -25,3 +25,7 @@ dns.setServers(["1.1.1.1","8.8.8.8"]);
 fix for type module -
 import dns from "dns"
 dns.setServers(["1.1.1.1","8.8.8.8"])
+
+
+bcrypt vs Crypto package
+The primary difference is that bcrypt is a specialized library designed specifically for secure password hashing, while crypto (typically referring to Node.js’s built-in crypto module or the crypto-js library) is a general-purpose toolkit for various cryptographic operations like encryption, digital signatures, and generic hashing. 
