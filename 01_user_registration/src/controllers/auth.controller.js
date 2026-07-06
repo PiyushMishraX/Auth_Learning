@@ -1,4 +1,4 @@
-import userModel from "../models/user.model"
+import userModel from "../models/user.model.js"
 import crypto from "crypto" // inbuilt in the nodejs similar t bcrypt used for encryption etc
 import jwt from "jsonwebtoken"  // need jwt secret to decrypt the token to verify if it is genrate by our server or not
 import config from "../config/config.js"
@@ -15,7 +15,7 @@ export async function register(req, res) {
     })
 
     if(isAlreadtRegistered){
-        res.status.json(409).json({
+        res.status(409).json({
             message: "Username or email already exists"
         })
     }

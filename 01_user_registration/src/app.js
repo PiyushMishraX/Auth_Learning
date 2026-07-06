@@ -10,4 +10,11 @@ app.use(morgan("dev"))
 
 app.use("/api/auth", authRouter);
 
+// app.use("/",(req,rest)=>{
+//     console.log("hello");
+//     rest.status(200).json({
+//         message:"Hello",
+//     }) // // just for testing
+// })
+
 export default app;
