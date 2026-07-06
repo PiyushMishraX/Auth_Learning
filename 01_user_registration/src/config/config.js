@@ -8,9 +8,11 @@ if(!process.env.MONGO_URI) {
     // we need to do this in config.js file for better and safer development
     // for every variable we create in inside MONGO_URI / .env we add checks t check if these varibales exist or not in our .env file , if not we throw error
     // this increase the quality of development /// if a new team memeber froks the project then he can easily know what variables he needs
+}
 
-
-
+if(!process.env.JWT_SECRET){
+    throw new Error("JWT_SECRET is not defined in eviornment variables");
+    
 }
 
 const config = {
