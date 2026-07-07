@@ -29,3 +29,11 @@ dns.setServers(["1.1.1.1","8.8.8.8"])
 
 bcrypt vs Crypto package
 The primary difference is that bcrypt is a specialized library designed specifically for secure password hashing, while crypto (typically referring to Node.js’s built-in crypto module or the crypto-js library) is a general-purpose toolkit for various cryptographic operations like encryption, digital signatures, and generic hashing. 
+
+Now adding user identification in server user stored token in users device to identify the user to perform tasks-
+creating an end point in server that identifies the user requesting server ( /api/auth/get-me )
+Identify user and send the information back
+The server responsibility after a user register is to read the token 
+Token come with the registered/logged in users request
+TOken is required to come from user 
+Accessed through headers / user cookies
