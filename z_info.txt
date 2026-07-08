@@ -37,3 +37,11 @@ The server responsibility after a user register is to read the token
 Token come with the registered/logged in users request
 TOken is required to come from user 
 Accessed through headers / user cookies
+
+In header ( postman testing ) - sending - 
+key - Authorization
+value - Bearer our_token ( writing Bearer with a space between the token is industry standard)
+req.headers.authorization.split(" ")[ 1 ] 
+split seperates Bearer and token
+
+Extension THudner client - Postman in the vs code with this extension , sending the request on behalf of clients
