@@ -65,3 +65,9 @@ Server reads it and returns new access token
 and this refresh token is stored in cookies 
 
 which protects from security risks
+
+access token expire in 15 minutes , refres token expire in 1d , 7d or the needed ammount, if the user takes more than 15 minutes than the server will genrate and use the new access token 
+
+access token is stored in memory
+adn refresh token is sotred in cookies -
+package - npm i cookie-parser
