@@ -45,3 +45,23 @@ req.headers.authorization.split(" ")[ 1 ]
 split seperates Bearer and token
 
 Extension THudner client - Postman in the vs code with this extension , sending the request on behalf of clients
+
+Till now if any logged in user have access token of any other user he can use that to access data of other using this token , which is very big security risk 
+
+This problem starts with the how the token is stored in client side , we can store in cookies ,but they are vunernable toolkit
+
+So we use third thing which is memory , variabel created and token stored in it,
+memory problem when page reload then memory clear , 
+so we use two tokens -
+Access token and
+Refresh token 
+( created while login / register)
+
+Access token is the normal token, we do not it in loczl storage , cookies or memory 
+
+Refresh token , when we refresh the page the access token clears , with refresh token we hit specific api - refresh , to go to this api we need refesh token , not acccess token,
+Server reads it and returns new access token
+
+and this refresh token is stored in cookies 
+
+which protects from security risks
