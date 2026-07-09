@@ -169,3 +169,30 @@ export async function getMe(req, res) {
     
     
 }
+
+export async function refreshToken(req, res) {
+    const refreshToken = req.cookies.refreshToken
+
+    if(!refreshToken){
+        return res.status(401).json({
+            message: "refresh token not found"
+        })
+    }
+
+    // if refresh token found than genrate new access token
+    const decoded = jwt.verify(refreshToken, config.JWT_SECRET)
+
+    // it better to send more details of user other than id in the token - this will be good practice
+    const accessToken = jwt.sign({
+        id: decoded.id
+    }, config.JWT_SECRET, 
+       {
+        expiresIn: "15m"
+       }
+    )
+
+    res.status(200).json({
+        message: "Access token refreshed successfully",
+        accessToken // send so it can be stored and used
+    })
+}
