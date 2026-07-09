@@ -71,3 +71,6 @@ access token expire in 15 minutes , refres token expire in 1d , 7d or the needed
 access token is stored in memory
 adn refresh token is sotred in cookies -
 package - npm i cookie-parser
+
+For extra layer of security we regenrate refreshToken with accessTOken too and set it 
+If someone get refresh token from any method then can generate Access TOken so resetting the refresh token is best ( the old one will get black listed)
