@@ -2,5 +2,27 @@ import mongoose from "mongoose"
 
 
 const sessionSchema = new mongoose.Schema({
-    
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+        required: [true, "User is required"]
+    }, 
+    refreshTokenHash: {
+        type: String,
+        required: [true, "Refresh token hash is required"]
+    },
+    ip: {
+        type: String,
+        required: [true, "IP address is required"]
+    },
+    userAgent: { // browser name , specification etc used by client
+        type: String,
+        required: [true, "User agent is required"]
+    },
+    revoke: { // revoke when user logout
+        type: Boolean,
+        default: false,
+    }
+}, {
+    timestamps: true
 })
