@@ -79,7 +79,7 @@ Next is logout from all devices feature ( logout from all devices at once )
 
 We maintain session on server for each device,
 
-sotring / this is saved -
+storing / this is saved -
 {
     userid
     refreshToken(Hash)
@@ -90,3 +90,4 @@ sotring / this is saved -
     revoke: true // by default false if is becomes trua then that refesh token at  that time cann't be used further more
     
 }
+
