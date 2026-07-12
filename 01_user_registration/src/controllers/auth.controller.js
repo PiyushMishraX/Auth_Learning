@@ -124,7 +124,7 @@ export async function register(req, res) {
     const refreshTokenHash = crypto.createHash("sha256").update(refreshToken).digest("hex")
 
     const session = await sessionModel.create({
-        userId: user._id,
+        user: user._id,
         refreshTokenHash,
         ip: req.ip,
         userAgent: req.headers[ "user-agent"]
@@ -223,4 +223,38 @@ export async function refreshToken(req, res) {
         message: "Access token refreshed successfully",
         accessToken // send so it can be stored and used
     })
+}
+
+export async function logout(req, res) {
+
+    const refreshToken = req.cookies.refreshToken
+
+    if(!refreshToken) {
+        return res.status(400).json({
+            message: "Refresh token not found"
+        })
+    }
+
+    const refreshTokenHash = crypto.createHash("sha256").update(refreshToken).digest("hex");
+
+    const session = await sessionModel.findOne({
+        refreshTokenHash,
+        revoke: false
+    })
+
+    if(!session){
+        return res.status(400).json({
+            message: "Invalid refresh token"
+        })
+    }
+
+    session.revoked = true
+    await session.save()
+
+    res.clearCookie("refreshToken")
+
+    res.status(200).json({
+        message: "Logged out successfully"
+    })
+    
 }
