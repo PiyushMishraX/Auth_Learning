@@ -91,3 +91,11 @@ storing / this is saved -
     
 }
 
+While the refresh Token is revoked the Access Token woud still be valid for the limit 
+So we perform token blacklisting in it
+
+Main drawback with using blacklisting database / redis is that it takes extra searching on a database
+Which reduces the level of scale that system can achieve
+
+To handle this giant companies usually create shortlived token ( accessToken) such as 10 mins expiry or less
+For instant logout we should use blacklisting
