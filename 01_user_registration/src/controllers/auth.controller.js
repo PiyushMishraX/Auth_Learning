@@ -195,6 +195,20 @@ export async function refreshToken(req, res) {
     // if refresh token found than genrate new access token
     const decoded = jwt.verify(refreshToken, config.JWT_SECRET)
 
+    const refreshTokenHash = crypto.createHash("sha256").update(refreshToken).digest("hex")
+
+    const session = await sessionModel.findOne({
+        refreshTokenHash,
+        revoked: false // the accessToken generation only happen when the session is not revoked else the accessToken won't be generated
+    })
+
+    if(!session){ // runs the refreshToken not exists or the session is revoked ( revoke is true / logout)
+        return res.status(401).json({
+            message: "Invalid refresh token"
+        })
+
+    }
+
     // it better to send more details of user other than id in the token - this will be good practice
     const accessToken = jwt.sign({
         id: decoded.id
@@ -211,6 +225,11 @@ export async function refreshToken(req, res) {
             expiresIn: "7d"
         } 
     )
+
+    const newRefreshTokenHash = crypto.createHash("sha256").update("newRefreshToken").digest("hex")
+
+    session.refreshTokenHash = newRefreshToken
+    await session.save()
 
     res.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
