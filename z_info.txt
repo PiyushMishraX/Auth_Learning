@@ -99,3 +99,18 @@ Which reduces the level of scale that system can achieve
 
 To handle this giant companies usually create shortlived token ( accessToken) such as 10 mins expiry or less
 For instant logout we should use blacklisting
+
+Adding , email OTP verification to prevent fake and suspicious users and bots from accessing the site , only verified acconts access all fetures
+
+user ---Register----> server
+server---OTP----> email
+email ---(if correct with email access)-->user
+user---OTP--> server
+Authenticated 
+
+Due to this only users with real emails can register and the resources in server won't be burned out
+
+users can  be registered / account /user can be created  but have to verify to use all fetures ( in start verify: false ) it will be verified : true when valid otp is entered by user
+
+Email sending functionality - nodemailer
+Oauth 2.0 credentials needed 

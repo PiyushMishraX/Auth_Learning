@@ -253,6 +253,8 @@ export async function getMe(req, res) {
 export async function refreshToken(req, res) {
     const refreshToken = req.cookies.refreshToken
 
+    console.log(refreshToken)
+
     if(!refreshToken){
         return res.status(401).json({
             message: "refresh token not found"
@@ -266,7 +268,7 @@ export async function refreshToken(req, res) {
 
     const session = await sessionModel.findOne({
         refreshTokenHash,
-        revoked: false // the accessToken generation only happen when the session is not revoked else the accessToken won't be generated
+        revoke: false // the accessToken generation only happen when the session is not revoked else the accessToken won't be generated
     })
 
     if(!session){ // runs the refreshToken not exists or the session is revoked ( revoke is true / logout)
@@ -277,7 +279,7 @@ export async function refreshToken(req, res) {
     }
 
     // it better to send more details of user other than id in the token - this will be good practice
-    const accessToken = jwt.sign({
+    const accessToken = jwt.sign({      
         id: decoded.id
     }, config.JWT_SECRET, 
        {
