@@ -412,7 +412,7 @@ export async function logoutAll(req, res) {
 export async function verifyEmail(req, res){
     const { otp , email } = req.body
 
-    const optHash = crypto.createHash("sha256").update(otp).digest("hex")
+    const otpHash = crypto.createHash("sha256").update(otp).digest("hex")
 
     const otpDoc = await otpModel.findOne({
         email,
@@ -425,8 +425,14 @@ export async function verifyEmail(req, res){
         })
     }
 
-    const user = await userModel.findByIdAndUpdate(otpDoc.user, {
+    // const user = await userModel.findByIdAndUpdate(otpDoc.user, {
+    //     verified: true
+    // }) // this returns old value of user.verify which is flase so  we use below -- >
+    const user = await userModel.findByIdAndUpdate(otpDoc.user, 
+        {
         verified: true
+    } ,{
+        new: true // this forces mongoose to return the updated document
     })
 
     // await otpModel.deleteMany({

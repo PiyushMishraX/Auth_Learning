@@ -121,4 +121,6 @@ In otp based authentication we do not genrate access and refresh token till user
 
 In email we send otp which is a utility
 
-all the opts will work for certain tiem than they will get expired
+all the opts will work for certain time than they will get expired , we set it in  expiration to add more security for the systme , and saving storage resouces ( expiration such as 15 mins or less  in otpModel )
+
+till verification we cannot get access and refresh token so we can not access any other api of the server
