@@ -114,3 +114,5 @@ users can  be registered / account /user can be created  but have to verify to u
 
 Email sending functionality - nodemailer
 Oauth 2.0 credentials needed 
+
+now setting up nodemailer inside services folder
