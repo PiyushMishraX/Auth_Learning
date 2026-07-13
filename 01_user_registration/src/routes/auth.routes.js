@@ -33,5 +33,10 @@ authRouter.get("/logout", authController.logout)
  */
 authRouter.get("/logout-all", authController.logoutAll)
 
+// for otp verification feature
+/**
+ * GET /api/auth/verify-email
+ */
+authRouter.get("/verify-email", authController.verifyEmail )
 
 export default authRouter
