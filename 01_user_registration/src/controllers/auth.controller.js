@@ -4,6 +4,9 @@ import jwt from "jsonwebtoken"  // need jwt secret to decrypt the token to verif
 import config from "../config/config.js"
 import sessionModel from "../models/session.model.js"
 import { sendEmail } from "../services/email.service.js"
+import { generateOtp, getOtpHtml } from "../utils/utils.js"
+import otpModel from "../models/otp.model.js"
+
 
 // export async function register(req, res) {
 
@@ -158,6 +161,19 @@ export async function register(req, res) {
     // })
 
 
+    const otp = generateOtp();
+    const html = getOtpHtml(otp);
+
+    const otpHash = crypto.createHash("sha256").update(otp).digest("hex") 
+    await otpModel.create({
+        email,
+        user: user._id,
+        otpHash
+    })
+
+    await sendEmail(email, "OTP verification", `Your OTP is $otp`, html)
+
+
     await sendEmail(email)
 
     res.status(201).json({
@@ -181,6 +197,12 @@ export async function login(req, res){
     if(!user){
         return res.status(401).json({
             message: "invalid email or password"
+        })
+    }
+
+    if(!user.verified){
+        return res.status(401).json({
+            message: "Email not verified"
         })
     }
 
